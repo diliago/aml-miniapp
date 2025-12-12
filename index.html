@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AML Checker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Хедер -->
+    <header class="header">
+      <div class="logo-box">
+        <div class="logo-cube"></div>
+      </div>
+      <div class="header-text">
+        <h1>Мгновенная AML-проверка</h1>
+        <p>Проверяйте кошельки и транзакции перед обменом.</p>
+      </div>
+    </header>
+
+    <!-- Карточка с вкладками и формой -->
+    <section class="card">
+      <div class="tabs">
+        <button class="tab active" data-tab="wallet">Кошелек</button>
+        <button class="tab" data-tab="tx">Транзакцию</button>
+      </div>
+
+      <!-- Форма кошелька -->
+      <form id="wallet-form" class="form form--wallet active">
+        <label class="field">
+          <span class="field-label">Монета</span>
+          <select name="coin" required>
+            <option value="" disabled selected>Выберите криптовалюту</option>
+            <option value="USDT">USDT</option>
+            <option value="USDC">USDC</option>
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Сеть</span>
+          <select name="network" required>
+            <option value="" disabled selected>Выберите сеть</option>
+            <option value="Tron TRC-20">Tron TRC-20</option>
+            <option value="ETH ERC-20">ETH ERC-20</option>
+            <option value="BSC BEP-20">BSC BEP-20</option>
+            <option value="Arbitrum One">Arbitrum One</option>
+            <option value="BTC">BTC</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Адрес кошелька</span>
+          <div class="field-input-with-icon">
+            <input
+              type="text"
+              name="address"
+              placeholder="Вставьте адрес кошелька"
+              required
+            />
+            <span class="field-icon">📋</span>
+          </div>
+        </label>
+
+        <p class="hint">3/3 оставшихся бесплатных проверок</p>
+
+        <button type="submit" class="btn btn-primary" id="wallet-submit">
+          Начать бесплатную проверку
+        </button>
+      </form>
+
+      <!-- Форма транзакции -->
+      <form id="tx-form" class="form form--tx">
+        <label class="field">
+          <span class="field-label">Монета</span>
+          <select name="coin" required>
+            <option value="" disabled selected>Выберите криптовалюту</option>
+            <option value="USDT">USDT</option>
+            <option value="USDC">USDC</option>
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Сеть</span>
+          <select name="network" required>
+            <option value="" disabled selected>Выберите сеть</option>
+            <option value="Tron TRC-20">Tron TRC-20</option>
+            <option value="ETH ERC-20">ETH ERC-20</option>
+            <option value="BSC BEP-20">BSC BEP-20</option>
+            <option value="Arbitrum One">Arbitrum One</option>
+            <option value="BTC">BTC</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Хэш транзакции</span>
+          <div class="field-input-with-icon">
+            <input
+              type="text"
+              name="txhash"
+              placeholder="Вставьте хэш транзакции"
+              required
+            />
+            <span class="field-icon">📋</span>
+          </div>
+        </label>
+
+        <p class="hint">3/3 оставшихся бесплатных проверок</p>
+
+        <button type="submit" class="btn btn-primary" id="tx-submit">
+          Начать бесплатную проверку
+        </button>
+      </form>
+
+      <!-- Экран загрузки -->
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p class="loading-title">Выполняем AML-проверку…</p>
+        <p class="loading-text">Обычно это занимает до 10 секунд.</p>
+      </div>
+
+      <!-- Результат -->
+      <div id="result" class="result">
+        <div class="result-header">
+          <div class="result-text">
+            <div class="risk-label" id="risk-label">Риск: —</div>
+            <div class="risk-score" id="risk-score">Скоринг: —</div>
+            <div class="risk-meta" id="risk-meta">Монета: — • Сеть: —</div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-arc">
+              <div class="gauge-fill" id="gauge-fill"></div>
+            </div>
+            <div class="gauge-center">
+              <span id="gauge-percent">—%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-body">
+          <h3>Краткий отчёт</h3>
+          <ul id="risk-list" class="risk-list">
+            <!-- пункты рисков наполняются скриптом -->
+          </ul>
+        </div>
+
+        <div class="result-actions">
+          <button id="btn-pdf" class="btn btn-primary-outline">
+            Скачать подробный PDF-отчёт
+          </button>
+          <button id="btn-new" class="btn btn-secondary">
+            Новая проверка
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Блок "Почему важна AML-проверка" -->
+    <section class="card card-info">
+      <h2>Почему важна AML-проверка?</h2>
+      <p>
+        Мы анализируем адрес по десяткам источников и оцениваем риск
+        взаимодействия: низкий, средний или высокий. Это помогает не получить
+        «грязные» средства и проходить проверки банков и регуляторов спокойнее.
+      </p>
+    </section>
+
+    <!-- Блок тарифов -->
+    <section class="card card-pricing">
+      <h2>Цены</h2>
+      <div class="pricing-row">
+        <div class="price-card">
+          <div class="price-badge">Базовый</div>
+          <div class="price-main">10 чеков за 4.4&nbsp;USDT</div>
+          <div class="price-sub">0.44 USDT за чек</div>
+          <button class="btn btn-secondary">Купить</button>
+        </div>
+
+        <div class="price-card">
+          <div class="price-badge">Плюс</div>
+          <div class="price-main">50 чеков за 21&nbsp;USDT</div>
+          <div class="price-sub">0.42 USDT за чек</div>
+          <button class="btn btn-secondary">Купить</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="card card-faq">
+      <h2>Часто задаваемые вопросы</h2>
+
+      <details class="faq-item">
+        <summary>Что такое AML-проверка?</summary>
+        <p>
+          AML-проверка — это анализ криптоадреса или транзакции на связь с
+          мошенничеством, взломами, даркнет-рынками и другими рисковыми
+          источниками.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Сколько времени занимает проверка?</summary>
+        <p>Обычно от 3 до 10 секунд.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Какие сети поддерживаются?</summary>
+        <p>
+          Tron TRC-20, Bitcoin, Ethereum, BSC и другие популярные сети. Список
+          постоянно дополняется.
+        </p>
+      </details>
+    </section>
+  </div>
+
+  <!-- Скрипты Telegram WebApp и логика приложения -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

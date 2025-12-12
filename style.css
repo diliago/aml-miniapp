@@ -1,0 +1,428 @@
+/* Общие стили */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Roboto", sans-serif;
+  background: radial-gradient(circle at top left, #1b1f33 0, #050509 45%);
+  color: #ffffff;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto 40px;
+}
+
+/* Карточки */
+
+.card {
+  background: #101119;
+  border-radius: 24px;
+  padding: 18px 18px 20px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Хедер */
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.logo-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 30% 20%, #ffffff 0, #f3b945 35%, #111 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.logo-cube {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: #101119;
+  border: 2px solid #ffffff;
+}
+
+.header-text h1 {
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+
+.header-text p {
+  margin: 0;
+  font-size: 13px;
+  color: #9ea3b6;
+}
+
+/* Вкладки */
+
+.tabs {
+  display: flex;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #a1a5b8;
+  cursor: pointer;
+  position: relative;
+}
+
+.tab.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+/* Формы */
+
+.form {
+  display: none;
+}
+
+.form.active {
+  display: block;
+}
+
+.field {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  color: #a1a5b8;
+  margin-bottom: 4px;
+}
+
+select,
+input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #ffffff;
+  background: #151722;
+  outline: none;
+}
+
+select:focus,
+input:focus {
+  border-color: #f4c24d;
+}
+
+select option {
+  color: #000;
+}
+
+/* Инпут с иконкой */
+
+.field-input-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-input-with-icon input {
+  flex: 1;
+}
+
+.field-icon {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+/* Подсказка под формой */
+
+.hint {
+  margin: 4px 0 12px;
+  font-size: 12px;
+  color: #9ea3b6;
+}
+
+/* Кнопки */
+
+.btn {
+  width: 100%;
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f6c453, #f39b3d);
+  color: #000000;
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-primary-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.btn-secondary {
+  background: #1a1c28;
+  color: #ffffff;
+}
+
+/* Загрузка */
+
+.loading {
+  display: none;
+  text-align: center;
+  padding: 24px 6px 10px;
+}
+
+.loading-title {
+  margin: 12px 0 4px;
+  font-size: 15px;
+}
+
+.loading-text {
+  margin: 0;
+  font-size: 13px;
+  color: #9ea3b6;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #f3b945;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Результат */
+
+.result {
+  display: none;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.result-text {
+  flex: 1;
+}
+
+.risk-label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.risk-score {
+  font-size: 13px;
+  margin-bottom: 2px;
+  color: #d4d6e4;
+}
+
+.risk-meta {
+  font-size: 12px;
+  color: #9ea3b6;
+}
+
+/* Полукруглый индикатор */
+
+.gauge {
+  width: 110px;
+  height: 60px;
+  position: relative;
+}
+
+.gauge-arc {
+  width: 100%;
+  height: 100%;
+  border-radius: 110px 110px 0 0;
+  background: conic-gradient(
+    from 180deg,
+    #2ecc71 0deg,
+    #2ecc71 60deg,
+    #f1c40f 60deg,
+    #f1c40f 120deg,
+    #e74c3c 120deg,
+    #e74c3c 180deg
+  );
+  overflow: hidden;
+  position: relative;
+}
+
+.gauge-fill {
+  position: absolute;
+  inset: 0;
+  background: #101119;
+  transform-origin: center bottom;
+  transform: rotate(0deg);
+}
+
+.gauge-center {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translateX(-50%);
+  background: #101119;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+/* Тело результата */
+
+.result-body h3 {
+  margin: 8px 0 6px;
+  font-size: 15px;
+}
+
+.risk-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: #d4d6e4;
+}
+
+.risk-list li {
+  margin-bottom: 4px;
+}
+
+/* Действия */
+
+.result-actions {
+  margin-top: 16px;
+}
+
+/* Инфо-карточка */
+
+.card-info h2 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.card-info p {
+  margin: 0;
+  font-size: 13px;
+  color: #d4d6e4;
+}
+
+/* Тарифы */
+
+.card-pricing h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.pricing-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.price-card {
+  min-width: 180px;
+  background: #151722;
+  border-radius: 18px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.price-badge {
+  font-size: 12px;
+  color: #f3b945;
+  margin-bottom: 4px;
+}
+
+.price-main {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.price-sub {
+  font-size: 12px;
+  color: #9ea3b6;
+  margin-bottom: 10px;
+}
+
+/* FAQ */
+
+.card-faq h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.faq-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 0;
+}
+
+.faq-item:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #d4d6e4;
+}
